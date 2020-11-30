@@ -18,3 +18,13 @@ Začetek nove igre
 Stanje igre - trenutni rezultat in najboljši rezultat (HUD)
 Gumb za novo igro
 Polje 4x4 s ploščicami
+
+## Logika igre
+Stanja v igri bom opisal s EnumSet. 
+Zaenkrat bo v igri maksimalna vrednost 2048 (v prihodnosti bo mogoče višja)
+Primer stanja celice:
+  CELL_EMPTY
+  CELL_2
+  CELL_4
+  ...
+  CELL_2048
