@@ -1,3 +1,4 @@
+
 package com.myboardgame.util;
 
 import com.badlogic.gdx.Gdx;
@@ -38,7 +39,7 @@ public class GdxUtils {
         parameter.color = Color.WHITE;
         parameter.borderWidth = 2;
         parameter.borderStraight = true;
-        parameter.characters ="0123456789LHAASDGGMATEJ CAPHEIW:.F,-+";
+        parameter.characters ="0123456789LHAASDGGMATEJ ORCAPHEIW:.F,-+";
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
 

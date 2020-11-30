@@ -44,9 +44,9 @@ public class DebugCameraConfig {
     private static final int DEFAULT_LOG_KEY = Input.Keys.ENTER;
 
     private static final float DEFAULT_MOVE_SPEED = 20.0f;
-    private static final float DEFAULT_ZOOM_SPEED = 2.0f;
+    private static final float DEFAULT_ZOOM_SPEED = 30f;
     private static final float DEFAULT_MAX_ZOOM_IN = 0.20f;
-    private static final float DEFAULT_MAX_ZOOM_OUT = 30f;
+    private static final float DEFAULT_MAX_ZOOM_OUT = 300f;
 
     // other
     private static final String FILE_PATH = "debug/debugCameraConfig.json";
@@ -182,8 +182,8 @@ public class DebugCameraConfig {
     @Override
     public String toString() {
         String LS = System.getProperty("line.separator");
-
-        return "DebugCameraConfig { " + LS +
+        return "";
+        /*return "DebugCameraConfig { " + LS +
                 "maxZoomIn= " + maxZoomIn + LS +
                 "maxZoomOut= " + maxZoomOut + LS +
                 "moveSpeed= " + moveSpeed + LS +
@@ -196,7 +196,7 @@ public class DebugCameraConfig {
                 "zoomOutKey= " + Input.Keys.toString(zoomOutKey) + LS +
                 "resetKey= " + Input.Keys.toString(resetKey) + LS +
                 "logKey= " + Input.Keys.toString(logKey) + LS +
-                "}";
+                "}";*/
     }
 
     // == static methods ==
