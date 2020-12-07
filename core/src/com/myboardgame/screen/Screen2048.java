@@ -19,10 +19,12 @@ import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.myboardgame.GameManager;
 import com.myboardgame.MyGdxGame;
 import com.myboardgame.assets.AssetDescriptors;
 import com.myboardgame.assets.AssetPaths;
 import com.myboardgame.assets.RegionNames;
+import com.myboardgame.components.Result;
 import com.myboardgame.debug.DebugCameraController;
 import com.myboardgame.hud.HUD;
 import com.myboardgame.util.GdxUtils;
@@ -97,13 +99,24 @@ public class Screen2048 extends ScreenAdapter{
 
     public void inputHandle() {
         if(state == GameState.RUNNING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) gameMain.safeExit();
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) saveAndExit();
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) commandUp();
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) commandDown();
             if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) commandRight();
             if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) commandLeft();
             if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) board.cheat();
+            if (Gdx.input.isKeyJustPressed(Input.Keys.X)) toggleSound();
         }
+    }
+
+    public void toggleSound(){
+        GameManager.INSTANCE.toggleSound();
+    }
+
+    public void saveAndExit(){
+        int score = hud.getScore();
+        if(score > 1) GameManager.INSTANCE.addResult(new Result(GameManager.INSTANCE.userID, score));
+        gameMain.goToScreen(MyGdxGame.Screen.MAIN);
     }
 
     private void drawHUD(float delta) {
@@ -400,7 +413,7 @@ public class Screen2048 extends ScreenAdapter{
                 hud.updateScore(2048);
                 break;
         }
-        am.get(AssetDescriptors.MERGE_SOUND).play();
+        if(GameManager.INSTANCE.isSound()) am.get(AssetDescriptors.MERGE_SOUND).play();
     }
 
     @Override

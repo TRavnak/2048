@@ -12,6 +12,9 @@ public class AssetDescriptors {
             new AssetDescriptor<TextureAtlas>(AssetPaths.MY_ATLAS, TextureAtlas.class);
     public static final AssetDescriptor<Sound> MERGE_SOUND =
             new AssetDescriptor<Sound>(AssetPaths.MERGE, Sound.class);
+    public static AssetDescriptor<Skin> DEFAULT_SKIN =
+            new AssetDescriptor<Skin>(AssetPaths.DEFAULT_UISKIN, Skin.class);
+
 
     private AssetDescriptors() {}
 }

@@ -12,6 +12,7 @@ public class RegionNames {
     public static final String IMG_512 = "img512";
     public static final String IMG_1024 = "img1024";
     public static final String IMG_2048 = "img2048";
+    public static final String BACK = "back";
 
     private RegionNames() {}
 }

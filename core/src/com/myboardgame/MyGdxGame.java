@@ -5,11 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Logger;
 import com.myboardgame.assets.AssetDescriptors;
 import com.myboardgame.assets.AssetPaths;
+import com.myboardgame.screen.ScreenMainMenu;
+import com.myboardgame.screen.ScreenResults;
 import com.myboardgame.screen.Screen2048;
-import com.myboardgame.util.GdxUtils;
 
 public class MyGdxGame extends Game {
 	SpriteBatch batch;
@@ -19,6 +19,7 @@ public class MyGdxGame extends Game {
 	public void load() {
 		assetManager.load(AssetDescriptors.MY_ATLAS);
 		assetManager.load(AssetDescriptors.MERGE_SOUND);
+		assetManager.load(AssetDescriptors.DEFAULT_SKIN);
 		assetManager.finishLoading();
 	}
 
@@ -34,14 +35,14 @@ public class MyGdxGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
-		gameManager = new GameManager();
+		gameManager = GameManager.INSTANCE;
 		load();
 		TextureAtlas atlas = new TextureAtlas(AssetPaths.MY_ATLAS);
 		selectFirstScreen();
 	}
 
 	public void selectFirstScreen() {
-		setScreen(new Screen2048(this));
+		goToScreen(Screen.MAIN);
 	}
 
 	@Override
@@ -60,6 +61,35 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void dispose () {
+		assetManager.dispose();
 		batch.dispose();
+	}
+
+
+
+	public static enum Screen {
+		MAIN, GAME, RESULT, SETTINGS
+	}
+
+	public void exit(){
+		GameManager.INSTANCE.saveResults();
+		Gdx.app.exit();
+	}
+
+	public void goToScreen (Screen screenType){
+		switch (screenType) {
+			case MAIN:
+				System.out.println("GO TO MAIN SCREEN");
+				super.setScreen(new ScreenMainMenu(this));
+				break;
+			case GAME:
+				super.setScreen(new Screen2048(this));
+				break;
+			case RESULT:
+				super.setScreen(new ScreenResults(this));
+				break;
+			default:
+		}
+		System.gc();
 	}
 }

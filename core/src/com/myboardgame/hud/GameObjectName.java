@@ -3,26 +3,21 @@ package com.myboardgame.hud;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.myboardgame.util.GdxUtils;
 
-public class GameObjectScore extends GameObject {
-    int score;
+public class GameObjectName extends GameObject{
+    String name;
     BitmapFont font; //reference
 
-    public GameObjectScore(float x, float y, float width, float height, BitmapFont font) {
+    public GameObjectName(float x, float y, float width, float height, BitmapFont font, String name) {
         super(x, y, width, height);
-        score = 0;
+        this.name = name;
         this.font = font;
-    }
-
-    public void addScore(int add) {
-        score+=add;
     }
 
     @Override
     public void render(SpriteBatch batch) {
         font.setColor(Color.RED);
-        font.draw(batch, "SCORE: "+score, bounds.x, bounds.y);
+        font.draw(batch, name, bounds.x, bounds.y);
     }
 
     @Override
