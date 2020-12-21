@@ -1,6 +1,7 @@
 package com.myboardgame.assets;
 
 public class RegionNames {
+    public static final String BOARD = "board";
     public static final String IMG_2 = "img2";
     public static final String IMG_4 = "img4";
     public static final String IMG_8 = "img8";

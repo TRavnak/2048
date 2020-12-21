@@ -99,7 +99,6 @@ public class Screen2048 extends ScreenAdapter{
 
     public void inputHandle() {
         if(state == GameState.RUNNING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) saveAndExit();
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) commandUp();
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) commandDown();
             if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) commandRight();
@@ -107,6 +106,7 @@ public class Screen2048 extends ScreenAdapter{
             if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) board.cheat();
             if (Gdx.input.isKeyJustPressed(Input.Keys.X)) toggleSound();
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) saveAndExit();
     }
 
     public void toggleSound(){
@@ -143,6 +143,8 @@ public class Screen2048 extends ScreenAdapter{
 
     private void drawBoard() {
         batch.setProjectionMatrix(boardCam.combined);
+        batch.draw(gamePlayAtlas.findRegion(RegionNames.BOARD), 0f, 0.5f, 4f, 4f);
+
         for (int x = 0; x < board.width; x++) {
             for (int y = 0; y < board.height; y++) {
                 if(board.boardArray[x][y].contains(BoardArray.CellState.CELL_2)){
@@ -202,6 +204,8 @@ public class Screen2048 extends ScreenAdapter{
                 }
             }
         }
+
+        batch.draw(gamePlayAtlas.findRegion(RegionNames.BOARD), 0f, 0.5f, 4f, 4f);
     }
 
     public void commandUp(){
