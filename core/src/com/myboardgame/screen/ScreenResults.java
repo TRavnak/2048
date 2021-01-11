@@ -72,7 +72,7 @@ public class ScreenResults extends ScreenAdapter {
             tableMain.add(tmp).row();
         }
 
-        Button btnBack = new TextButton("EXIT", uiskin);
+        Button btnBack = new TextButton("BACK", uiskin);
         btnBack.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

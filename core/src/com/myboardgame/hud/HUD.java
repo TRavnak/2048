@@ -11,7 +11,9 @@ import com.myboardgame.util.GdxUtils;
 public class HUD implements Disposable {
     Screen2048 game;
     GameObjectScore score;
+    GameObjectHighScore bScore;
     GameObjectName name;
+    GameObjectEncGame endMsg;
     BitmapFont font;
     float x;
     float y;
@@ -41,22 +43,38 @@ public class HUD implements Disposable {
     }
 
     private void createFontBasedObjects() {
-        font = GdxUtils.getTTFFontInWorldUnits(0.4f, game.boardV.getWorldHeight());
+        font = GdxUtils.getTTFFontInWorldUnits(0.35f, game.boardV.getWorldHeight());
+
         Vector3 tmpInWordCoordinateToScreen = new Vector3();
-        tmpInWordCoordinateToScreen.set(x, y - h / 2 + 0.5f, 0);
+
+        tmpInWordCoordinateToScreen.set(x+0.1f, y - h / 2 + 0.4f, 0);
         GdxUtils.ProjectWorldCoordinatesInScreenCoordinates(game.boardCam, tmpInWordCoordinateToScreen);
         score = new GameObjectScore(tmpInWordCoordinateToScreen.x, tmpInWordCoordinateToScreen.y, 3, 0.5f, font);
-        tmpInWordCoordinateToScreen.set(x+1.8f, y - h / 2 + 0.5f, 0);
+
+        tmpInWordCoordinateToScreen.set(x + w / 2 - 0.2f, y-0.1f, 0);
         GdxUtils.ProjectWorldCoordinatesInScreenCoordinates(game.boardCam, tmpInWordCoordinateToScreen);
         name = new GameObjectName(tmpInWordCoordinateToScreen.x, tmpInWordCoordinateToScreen.y, 3, 0.5f, font, GameManager.INSTANCE.userID);
+
+        tmpInWordCoordinateToScreen.set(x + w / 2 + 0.5f, y - h / 2 + 0.4f, 0);
+        GdxUtils.ProjectWorldCoordinatesInScreenCoordinates(game.boardCam, tmpInWordCoordinateToScreen);
+        bScore = new GameObjectHighScore(tmpInWordCoordinateToScreen.x, tmpInWordCoordinateToScreen.y, 3, 0.5f, font);
+
+        tmpInWordCoordinateToScreen.set(x + w / 2 - 0.6f, y - h / 2, 0);
+        GdxUtils.ProjectWorldCoordinatesInScreenCoordinates(game.boardCam, tmpInWordCoordinateToScreen);
+        endMsg = new GameObjectEncGame(tmpInWordCoordinateToScreen.x, tmpInWordCoordinateToScreen.y, 3, 0.5f, font);
 
     }
 
     public void renderUpdate(SpriteBatch batch, float dt){
         batch.setProjectionMatrix(game.cameraFont.combined);
         score.render(batch);
+        bScore.render(batch);
         name.render(batch);
+        if(GameManager.INSTANCE.isGameOver) {
+            endMsg.render(batch);
+        }
     }
+
 
     public void resize(int width, int height) {
         if (score != null) score.dispose();

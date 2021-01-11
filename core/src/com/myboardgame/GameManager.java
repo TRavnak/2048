@@ -17,6 +17,7 @@ public class GameManager {
     public String userID;
     private Preferences PREFS;
     Json json;
+    public boolean isGameOver;
     public ResultList results;
     public static final GameManager INSTANCE = new GameManager();
 
@@ -24,6 +25,7 @@ public class GameManager {
         json = new Json();
         PREFS = Gdx.app.getPreferences(MyGdxGame.class.getSimpleName());
         userID ="Tilen";
+        isGameOver = false;
         loadResults();
         results.sortList();
     }

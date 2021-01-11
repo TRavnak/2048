@@ -93,7 +93,7 @@ public class ScreenMainMenu extends ScreenAdapter {
 
         Table nameTable = new Table();
         Label addressLabel = new Label("Name: ", uiskin);
-        textFieldName = new TextField("", uiskin);
+        textFieldName = new TextField(GameManager.INSTANCE.userID, uiskin);
         nameTable.add(addressLabel);
         nameTable.add(textFieldName).width(200);
         nameTable.row();

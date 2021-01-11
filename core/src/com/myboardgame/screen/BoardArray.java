@@ -1,6 +1,7 @@
 package com.myboardgame.screen;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.myboardgame.GameManager;
 
 import java.util.EnumSet;
 
@@ -65,6 +66,7 @@ public class BoardArray {
     }
 
     public void addNew() {
+
         if(end) return;
         while (true) {
             int x = MathUtils.random(0, width - 1);
@@ -80,6 +82,7 @@ public class BoardArray {
                 break;
             }
         }
+        endGame();
     }
 
     public void cheat() {
@@ -137,9 +140,22 @@ public class BoardArray {
         boolean test = true;
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
-                if(boardArray[i][j].contains(CellState.CELL_EMPTY)) test = false;
+                if (boardArray[i][j].toString().equals("[CELL_EMPTY]")) test = false;
+                if (i > 0){
+                    if(boardArray[i][j].toString().equals(boardArray[i-1][j].toString())) test = false;
+                }
+                if (j > 0){
+                    if(boardArray[i][j].toString().equals(boardArray[i][j-1].toString())) test = false;
+                }
+                if(i < 3){
+                    if(boardArray[i][j].toString().equals(boardArray[i+1][j].toString())) test = false;
+                }
+                if(j < 3){
+                    if(boardArray[i][j].toString().equals(boardArray[i][j+1].toString())) test = false;
+                }
             }
         }
         end = test;
+        GameManager.INSTANCE.isGameOver = test;
     }
 }
